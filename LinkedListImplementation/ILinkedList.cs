@@ -2,10 +2,10 @@
 {
     interface ILinkedList<T>
     {
-        int Count { get; }
+        int Count { get;  set; }
 
-        Node<T> head { get; set; }
+        Node<T> Head { get; set; }
 
-        Node<T> tail { get; set; }
+        Node<T> Tail { get; set; }
     } 
 }
