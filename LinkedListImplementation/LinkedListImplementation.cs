@@ -7,9 +7,9 @@ namespace LinkedListImplementation
     {
         public int Count { get; private set; }
 
-        private Node<T> tail;
+        private Node<T> Tail;
 
-        private Node<T> head;
+        private Node<T> Head;
 
         public MyLinkedList()
         {
@@ -18,9 +18,9 @@ namespace LinkedListImplementation
 
         public MyLinkedList(IEnumerable<T> collection)
         {
-            head = new Node<T> (collection.First());
-            var current = head;
-            tail = current;
+            Head = new Node<T> (collection.First());
+            var current = Head;
+            Tail = current;
 
             foreach (var item in collection.Skip(1))
             {
@@ -28,15 +28,15 @@ namespace LinkedListImplementation
                 current.Next = newCurrent;
                 newCurrent.Prev = current;
                 current = newCurrent;
-                tail = current;
+                Tail = current;
             }
         }
 
         public T GetMin()
         {
-            T min = head.Data;
+            T min = Head.Data;
 
-            var current = head;
+            var current = Head;
 
             while (current.Next != null)
             {
@@ -53,9 +53,9 @@ namespace LinkedListImplementation
 
         public T GetMax()
         {
-            T max = head.Data;
+            T max = Head.Data;
 
-            var current = head;
+            var current = Head;
 
             while (current.Next != null)
             {
@@ -72,7 +72,7 @@ namespace LinkedListImplementation
 
         public void PrintList()
         {
-            var current = head;
+            var current = Head;
 
             while (current != null)
             {
@@ -80,7 +80,7 @@ namespace LinkedListImplementation
                 current = current.Next;
             }
 
-            current = tail;
+            current = Tail;
             Console.WriteLine();
 
             while (current != null)
@@ -89,20 +89,6 @@ namespace LinkedListImplementation
                 current = current.Prev;
             }
         }
-        public class Node<T>
-        {
-            public T Data { get; private set; }
-            public Node<T> Prev { get; private set; }
-            public Node<T> Next { get; private set; }
-            public Node(T value)
-            {
-                Data = value;
-            }
-        }
-
-        public int Count { get; private set; }
-
-        public Node<T> Tail { get; private set; }
-        public Node<T> Head { get; private set; }
+        
     }
 }
