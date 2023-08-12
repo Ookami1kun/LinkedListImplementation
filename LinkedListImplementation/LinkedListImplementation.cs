@@ -6,13 +6,12 @@ namespace LinkedListImplementation
     {
         public class Node<T>
         {
-            public T data;
-            public Node<T> prev;
-            public Node<T> next;
-
+            public T Data { get; private set; }
+            public Node<T> Prev { get; private set; }
+            public Node<T> Next { get; private set; }
             public Node(T value)
             {
-                data = value;
+                Data = value;
             }
         }
 
