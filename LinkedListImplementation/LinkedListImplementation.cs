@@ -5,11 +5,22 @@ namespace LinkedListImplementation
 {
     public class MyLinkedList<T> : ILinkedList<T> where T : IComparable<T>
     {
+        public class Node<T>
+        {
+            public T Data { get; private set; }
+            public Node<T> Prev { get; set; }
+            public Node<T> Next { get; set; }
+
+            public Node(T value)
+            {
+                Data = value;
+            }
+        }
+
         public int Count { get; private set; }
 
-        private Node<T> Tail;
-
-        private Node<T> Head;
+        public Node<T> Tail { get; private set; }
+        public Node<T> Head { get; private set; }
 
         public MyLinkedList()
         {
