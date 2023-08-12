@@ -6,9 +6,9 @@ namespace LinkedListImplementation
     {
         public class Node<T>
         {
-            private T data;
-            private Node<T> prev;
-            private Node<T> next;
+            public T data;
+            public Node<T> prev;
+            public Node<T> next;
 
             public Node(T value)
             {
@@ -17,10 +17,8 @@ namespace LinkedListImplementation
         }
 
         public int Count { get; private set; }
-        private Node<T> tail;
-        private Node<T> head;
 
-        public Node<T> Tail { get { return tail; } private set { tail = value; } }
-        public Node<T> Head { get { return head; } private set { head = value; } }
+        public Node<T> Tail { get; private set; }
+        public Node<T> Head { get; private set; }
     }
 }
