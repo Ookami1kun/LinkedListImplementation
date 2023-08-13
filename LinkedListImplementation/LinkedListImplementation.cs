@@ -1,5 +1,4 @@
 ﻿using LinkedListImplementation.Interfaces;
-﻿using System.Reflection.Metadata.Ecma335;
 
 namespace LinkedListImplementation
 {
@@ -7,7 +6,7 @@ namespace LinkedListImplementation
     {
         public class Node<T>
         {
-            public T Data { get; private set; }
+            public T Data { get; }
             public Node<T> Prev { get; set; }
             public Node<T> Next { get; set; }
 
