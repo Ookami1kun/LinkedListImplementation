@@ -1,14 +1,15 @@
-﻿using LinkedListImplementation.Interfaces;
+﻿using System.Data.SqlTypes;
+using LinkedListImplementation.Interfaces;
 
 namespace LinkedListImplementation
 {
-    class Program
+    class Program 
     {
         public static void Main(string[] args)
         {
-            int[] array = { 1, 2, 3, 4, 5, 6};
+            IEnumerable<int> array = new int[] { 1, 2, 3, 4, 5};
 
-            ILinkedList<int> list = new MyLinkedList<int>(array);
+            MyLinkedList<int> list= new MyLinkedList<int>(array);
         }
     }
 }
