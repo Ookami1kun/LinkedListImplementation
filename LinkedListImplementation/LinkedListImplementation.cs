@@ -18,11 +18,8 @@ namespace LinkedListImplementation
 
         public int Count { get; private set; }
 
-        //public Node<T> Tail { get; private set; }
-        //public Node<T> Head { get; private set; }
-
-        public Node<T> Tail;
-        public Node<T> Head;
+        public Node<T> Tail { get; private set; }
+        public Node<T> Head { get; private set; }
 
         public MyLinkedList()
         {
