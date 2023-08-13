@@ -4,11 +4,22 @@ namespace LinkedListImplementation
 {
     public class MyLinkedList<T> : ILinkedList<T> where T : IComparable<T>
     {
+        public class Node<T>
+        {
+            public T Data { get; }
+            public Node<T> Prev { get; set; }
+            public Node<T> Next { get; set; }
+
+            public Node(T value)
+            {
+                Data = value;
+            }
+        }
+
         public int Count { get; private set; }
 
-        private Node<T> tail;
-
-        private Node<T> head;
+        public Node<T> Tail { get; private set; }
+        public Node<T> Head { get; private set; }
 
         public MyLinkedList()
         {
@@ -17,9 +28,9 @@ namespace LinkedListImplementation
 
         public MyLinkedList(IEnumerable<T> collection)
         {
-            head = new Node<T>(collection.First());
-            var current = head;
-            tail = current;
+            Head = new Node<T> (collection.First());
+            var current = Head;
+            Tail = current;
 
             foreach (var item in collection.Skip(1))
             {
@@ -27,15 +38,14 @@ namespace LinkedListImplementation
                 current.Next = newCurrent;
                 newCurrent.Prev = current;
                 current = newCurrent;
-                tail = current;
+                Tail = current;
             }
         }
 
         public T GetMin()
         {
-            T min = head.Data;
-
-            var current = head;
+            T min = Head.Data;
+            var current = Head;
 
             while (current.Next != null)
             {
@@ -43,7 +53,6 @@ namespace LinkedListImplementation
                 {
                     min = current.Next.Data;
                 }
-
                 current = current.Next;
             }
 
@@ -52,9 +61,8 @@ namespace LinkedListImplementation
 
         public T GetMax()
         {
-            T max = head.Data;
-
-            var current = head;
+            T max = Head.Data;
+            var current = Head;
 
             while (current.Next != null)
             {
@@ -62,7 +70,6 @@ namespace LinkedListImplementation
                 {
                     max = current.Next.Data;
                 }
-
                 current = current.Next;
             }
 
@@ -199,7 +206,7 @@ namespace LinkedListImplementation
 
         public void PrintList()
         {
-            var current = head;
+            var current = Head;
 
             while (current != null)
             {
@@ -207,7 +214,7 @@ namespace LinkedListImplementation
                 current = current.Next;
             }
 
-            current = tail;
+            current = Tail;
             Console.WriteLine();
 
             while (current != null)
@@ -216,5 +223,6 @@ namespace LinkedListImplementation
                 current = current.Prev;
             }
         }
+        
     }
 }
