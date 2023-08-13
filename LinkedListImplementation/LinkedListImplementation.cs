@@ -18,8 +18,11 @@ namespace LinkedListImplementation
 
         public int Count { get; private set; }
 
-        public Node<T> Tail { get; private set; }
-        public Node<T> Head { get; private set; }
+        //public Node<T> Tail { get; private set; }
+        //public Node<T> Head { get; private set; }
+
+        public Node<T> Tail;
+        public Node<T> Head;
 
         public MyLinkedList()
         {
@@ -78,40 +81,40 @@ namespace LinkedListImplementation
 
         public void Add(T value)
         {
-            if (tail == null)
+            if (Tail == null)
             {
-                head = new Node<T>(value);
-                tail = head;
+                Head = new Node<T>(value);
+                Tail = Head;
             }
             else
             {
                 var current = new Node<T>(value);
-                tail.Next = current;
-                current.Prev = tail;
-                tail = current;
+                Tail.Next = current;
+                current.Prev = Tail;
+                Tail = current;
             }
         }
 
         public void AddStart(T value)
         {
-            if (head == null)
+            if (Head == null)
             {
-                head = new Node<T>(value);
-                tail = head;
+                Head = new Node<T>(value);
+                Tail = Head;
             }
             else
             {
                 var current = new Node<T>(value);
-                head.Prev = current;
-                current.Next = head;
-                head = current;
+                Head.Prev = current;
+                current.Next = Head;
+                Head = current;
             }
         }
 
         public bool Contains(T value)
         {
             bool result = false;
-            var current = head;
+            var current = Head;
 
             while (current != null)
             {
@@ -128,7 +131,7 @@ namespace LinkedListImplementation
 
         public void RemoveByValue(T value)
         {
-            var current = head;
+            var current = Head;
 
             while (current != null)
             {
@@ -136,13 +139,13 @@ namespace LinkedListImplementation
                 {
                     if (current.Prev == null)
                     {
-                        head = current.Next;
-                        head.Prev = null;
+                        Head = current.Next;
+                        Head.Prev = null;
                     }
                     else if (current.Next == null)
                     {
-                        tail = current.Prev;
-                        tail.Next = null;
+                        Tail = current.Prev;
+                        Tail.Next = null;
                     }
                     else
                     {
@@ -161,7 +164,7 @@ namespace LinkedListImplementation
 
         public void RemoveLastByValue(T value)
         {
-            var current = tail;
+            var current = Tail;
 
             while (current != null)
             {
@@ -169,13 +172,13 @@ namespace LinkedListImplementation
                 {
                     if (current.Prev == null)
                     {
-                        head = current.Next;
-                        head.Prev = null;
+                        Head = current.Next;
+                        Head.Prev = null;
                     }
                     else if (current.Next == null)
                     {
-                        tail = current.Prev;
-                        tail.Next = null;
+                        Tail = current.Prev;
+                        Tail.Next = null;
                     }
                     else
                     {
@@ -194,14 +197,14 @@ namespace LinkedListImplementation
 
         public void RemoveFirst()
         {
-            head = head.Next;
-            head.Prev = null;
+            Head = Head.Next;
+            Head.Prev = null;
         }
 
         public void RemoveLast()
         {
-            tail = tail.Prev;
-            tail.Next = null;
+            Tail = Tail.Prev;
+            Tail.Next = null;
         }
 
         public void PrintList()
