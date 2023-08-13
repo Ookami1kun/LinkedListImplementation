@@ -45,7 +45,6 @@ namespace LinkedListImplementation
         public T GetMin()
         {
             T min = Head.Data;
-
             var current = Head;
 
             while (current.Next != null)
@@ -54,7 +53,6 @@ namespace LinkedListImplementation
                 {
                     min = current.Next.Data;
                 }
-
                 current = current.Next;
             }
            
@@ -64,7 +62,6 @@ namespace LinkedListImplementation
         public T GetMax()
         {
             T max = Head.Data;
-
             var current = Head;
 
             while (current.Next != null)
@@ -73,7 +70,6 @@ namespace LinkedListImplementation
                 {
                     max = current.Next.Data;
                 }
-
                 current = current.Next;
             }
 
