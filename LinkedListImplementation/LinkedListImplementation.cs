@@ -71,18 +71,34 @@ namespace LinkedListImplementation
 
         public void Add(T value)
         {
-            var current = new Node<T>(value);
-            tail.Next = current;
-            current.Prev = tail;
-            tail = current;
+            if (tail == null)
+            {
+                head = new Node<T>(value);
+                tail = head;
+            }
+            else
+            {
+                var current = new Node<T>(value);
+                tail.Next = current;
+                current.Prev = tail;
+                tail = current;
+            }
         }
 
         public void AddStart(T value)
         {
-            var current = new Node<T>(value);
-            head.Prev = current;
-            current.Next = head;
-            head = current;
+            if (head == null)
+            {
+                head = new Node<T>(value);
+                tail = head;
+            }
+            else
+            {
+                var current = new Node<T>(value);
+                head.Prev = current;
+                current.Next = head;
+                head = current;
+            }
         }
 
         public bool Contains(T value)
