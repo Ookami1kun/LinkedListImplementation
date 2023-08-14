@@ -28,17 +28,9 @@ namespace LinkedListImplementation
 
         public MyLinkedList(IEnumerable<T> collection)
         {
-            Head = new Node<T> (collection.First());
-            var current = Head;
-            Tail = current;
-
-            foreach (var item in collection.Skip(1))
+            foreach (var item in collection)
             {
-                var newCurrent = new Node<T>(item);
-                current.Next = newCurrent;
-                newCurrent.Prev = current;
-                current = newCurrent;
-                Tail = current;
+                Add(item);
             }
         }
 
@@ -118,12 +110,32 @@ namespace LinkedListImplementation
                 if (value.CompareTo(current.Data) == 0)
                 {
                     result = true;
+                    break;
                 }
 
                 current = current.Next;
             }
 
             return result;
+        }
+
+        public void Method(Node<T> current)
+        {
+            if (current.Prev == null)
+            {
+                Head = current.Next;
+                Head.Prev = null;
+            }
+            else if (current.Next == null)
+            {
+                Tail = current.Prev;
+                Tail.Next = null;
+            }
+            else
+            {
+                current.Next.Prev = current.Prev;
+                current.Prev.Next = current.Next;
+            }
         }
 
         public void RemoveByValue(T value)
@@ -134,23 +146,7 @@ namespace LinkedListImplementation
             {
                 if (value.CompareTo(current.Data) == 0)
                 {
-                    if (current.Prev == null)
-                    {
-                        Head = current.Next;
-                        Head.Prev = null;
-                    }
-                    else if (current.Next == null)
-                    {
-                        Tail = current.Prev;
-                        Tail.Next = null;
-                    }
-                    else
-                    {
-                        var newCurrent = current.Prev;
-                        newCurrent.Next = current.Next;
-                        newCurrent.Next.Prev = current.Prev;
-                        current = newCurrent;
-                    }
+                    Method(current);
 
                     break;
                 }
@@ -167,23 +163,7 @@ namespace LinkedListImplementation
             {
                 if (value.CompareTo(current.Data) == 0)
                 {
-                    if (current.Prev == null)
-                    {
-                        Head = current.Next;
-                        Head.Prev = null;
-                    }
-                    else if (current.Next == null)
-                    {
-                        Tail = current.Prev;
-                        Tail.Next = null;
-                    }
-                    else
-                    {
-                        var newCurrent = current.Prev;
-                        newCurrent.Next = current.Next;
-                        newCurrent.Next.Prev = current.Prev;
-                        current = newCurrent;
-                    }
+                    Method(current);
 
                     break;
                 }
@@ -223,6 +203,6 @@ namespace LinkedListImplementation
                 current = current.Prev;
             }
         }
-        
+
     }
 }
