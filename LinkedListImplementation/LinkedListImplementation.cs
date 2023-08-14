@@ -110,6 +110,7 @@ namespace LinkedListImplementation
                 if (value.CompareTo(current.Data) == 0)
                 {
                     result = true;
+
                     break;
                 }
 
@@ -119,7 +120,7 @@ namespace LinkedListImplementation
             return result;
         }
 
-        public void Method(Node<T> current)
+        private void RemoveNode(Node<T> current)
         {
             if (current.Prev == null)
             {
@@ -146,8 +147,7 @@ namespace LinkedListImplementation
             {
                 if (value.CompareTo(current.Data) == 0)
                 {
-                    Method(current);
-
+                    RemoveNode(current);
                     break;
                 }
 
@@ -163,8 +163,7 @@ namespace LinkedListImplementation
             {
                 if (value.CompareTo(current.Data) == 0)
                 {
-                    Method(current);
-
+                    RemoveNode(current);
                     break;
                 }
 
