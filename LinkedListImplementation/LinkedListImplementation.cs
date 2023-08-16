@@ -68,23 +68,7 @@ namespace LinkedListImplementation
             return max;
         }
 
-        public void Add(T value)
-        {
-            if (Tail == null)
-            {
-                Head = new Node<T>(value);
-                Tail = Head;
-            }
-            else
-            {
-                var current = new Node<T>(value);
-                Tail.Next = current;
-                current.Prev = Tail;
-                Tail = current;
-            }
-        }
-
-        public void AddStart(T value)
+        private void AddNode(T value, Action action)
         {
             if (Head == null)
             {
@@ -93,11 +77,30 @@ namespace LinkedListImplementation
             }
             else
             {
+                action();
+            }
+        }
+
+        public void Add(T value)
+        {
+            AddNode(value, () =>
+            {
+                var current = new Node<T>(value);
+                Tail.Next = current;
+                current.Prev = Tail;
+                Tail = current;
+            });
+        }
+
+        public void AddStart(T value)
+        {
+            AddNode(value, () =>
+            {
                 var current = new Node<T>(value);
                 Head.Prev = current;
                 current.Next = Head;
                 Head = current;
-            }
+            });
         }
 
         public bool Contains(T value)
