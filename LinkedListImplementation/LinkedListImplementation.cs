@@ -28,17 +28,9 @@ namespace LinkedListImplementation
 
         public MyLinkedList(IEnumerable<T> collection)
         {
-            Head = new Node<T> (collection.First());
-            var current = Head;
-            Tail = current;
-
-            foreach (var item in collection.Skip(1))
+            foreach (var item in collection)
             {
-                var newCurrent = new Node<T> (item);
-                current.Next = newCurrent;
-                newCurrent.Prev = current;
-                current = newCurrent;
-                Tail = current;
+                Add(item);
             }
         }
 
@@ -55,7 +47,7 @@ namespace LinkedListImplementation
                 }
                 current = current.Next;
             }
-           
+
             return min;
         }
 
@@ -74,6 +66,124 @@ namespace LinkedListImplementation
             }
 
             return max;
+        }
+
+        private void AddNode(T value, Action action)
+        {
+            if (Head == null)
+            {
+                Head = new Node<T>(value);
+                Tail = Head;
+            }
+            else
+            {
+                action();
+            }
+        }
+
+        public void Add(T value)
+        {
+            AddNode(value, () =>
+            {
+                var current = new Node<T>(value);
+                Tail.Next = current;
+                current.Prev = Tail;
+                Tail = current;
+            });
+        }
+
+        public void AddStart(T value)
+        {
+            AddNode(value, () =>
+            {
+                var current = new Node<T>(value);
+                Head.Prev = current;
+                current.Next = Head;
+                Head = current;
+            });
+        }
+
+        public bool Contains(T value)
+        {
+            bool result = false;
+            var current = Head;
+
+            while (current != null)
+            {
+                if (value.CompareTo(current.Data) == 0)
+                {
+                    result = true;
+
+                    break;
+                }
+
+                current = current.Next;
+            }
+
+            return result;
+        }
+
+        private void RemoveNode(Node<T> current)
+        {
+            if (current.Prev == null)
+            {
+                Head = current.Next;
+                Head.Prev = null;
+            }
+            else if (current.Next == null)
+            {
+                Tail = current.Prev;
+                Tail.Next = null;
+            }
+            else
+            {
+                current.Next.Prev = current.Prev;
+                current.Prev.Next = current.Next;
+            }
+        }
+
+        public void RemoveByValue(T value)
+        {
+            var current = Head;
+
+            while (current != null)
+            {
+                if (value.CompareTo(current.Data) == 0)
+                {
+                    RemoveNode(current);
+                    break;
+                }
+
+                current = current.Next;
+            }
+        }
+
+        public void RemoveLastByValue(T value)
+        {
+            var current = Tail;
+
+            while (current != null)
+            {
+                if (value.CompareTo(current.Data) == 0)
+                {
+                    RemoveNode(current);
+                    break;
+                }
+
+                current = current.Prev;
+            }
+        }
+
+        public void RemoveFirst()
+        {
+            Head = Head.Next;
+            Head.Prev = null;
+        }
+
+        public void RemoveLast()
+        {
+            Tail = Tail.Prev;
+            Tail.Next = null;
         }
 
         public void PrintList()
@@ -95,6 +205,6 @@ namespace LinkedListImplementation
                 current = current.Prev;
             }
         }
-        
+
     }
 }
