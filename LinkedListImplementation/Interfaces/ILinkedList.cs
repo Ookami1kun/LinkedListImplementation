@@ -3,7 +3,6 @@
     interface ILinkedList<T>
     {
         int Count { get; }
-
         void Add(T value);
         void AddStart(T value);
         void PrintList();
@@ -14,5 +13,6 @@
         void RemoveLast();
         void RemoveByValue(T value);
         void RemoveLastByValue(T value);
+        IIterator<T> CreateIterator();
     }
 }
