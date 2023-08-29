@@ -10,11 +10,20 @@ namespace LinkedListImplementation
 
             ILinkedList<int> list = new MyLinkedList<int>(array);
 
-            IIterator<int> iterator = list.CreateIterator();
+            IIterator<int> iterator = list.CreateDescendingIterator();
 
             while (iterator.HasNext())
             {
-                Console.WriteLine(iterator.Current());
+                Console.Write(iterator.Current() + " ");
+                iterator.MoveNext();
+            }
+
+            iterator.Reset();
+            Console.WriteLine();
+
+            while (iterator.HasNext())
+            {
+                Console.Write(iterator.Current() + " ");
                 iterator.MoveNext();
             }
         }

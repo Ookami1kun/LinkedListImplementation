@@ -1,6 +1,6 @@
 ﻿namespace LinkedListImplementation.Interfaces
 {
-    interface ILinkedList<T>
+    interface ILinkedList<T> : IOrdinaryIterator<T>, IDescendingIterator<T>
     {
         int Count { get; }
         void Add(T value);
@@ -13,6 +13,5 @@
         void RemoveLast();
         void RemoveByValue(T value);
         void RemoveLastByValue(T value);
-        IIterator<T> CreateIterator();
     }
 }

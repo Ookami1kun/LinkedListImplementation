@@ -2,7 +2,7 @@
 
 namespace LinkedListImplementation
 {
-    public class MyLinkedList<T> : ILinkedList<T>, IOrdinaryIterator<T> where T : IComparable<T>
+    public class MyLinkedList<T> : ILinkedList<T>, IOrdinaryIterator<T>, IDescendingIterator<T> where T : IComparable<T>
     {
         public class Node<T>
         {
@@ -37,6 +37,11 @@ namespace LinkedListImplementation
         public IIterator<T> CreateIterator()
         {
             return new Iterator<T>(this);
+        }
+
+        public IIterator<T> CreateDescendingIterator()
+        {
+            return new DescendingIterator<T>(this);
         }
 
         public T GetMin()
