@@ -22,20 +22,12 @@ namespace LinkedListImplementation
 
         public T Current()
         {
-
             return _position.Data;
         }
 
         public bool HasNext()
         {
-            if (index >= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return index >= 0;
         }
 
         public void MoveNext()

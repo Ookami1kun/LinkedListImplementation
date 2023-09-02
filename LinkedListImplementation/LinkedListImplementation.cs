@@ -2,7 +2,7 @@
 
 namespace LinkedListImplementation
 {
-    public class MyLinkedList<T> : ILinkedList<T>, IOrdinaryIterator<T>, IDescendingIterator<T> where T : IComparable<T>
+    public class MyLinkedList<T> : ILinkedList<T> where T : IComparable<T>
     {
         public class Node<T>
         {

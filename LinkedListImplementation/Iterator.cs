@@ -20,14 +20,7 @@ namespace LinkedListImplementation
 
         public bool HasNext()
         {
-            if (_position != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return _position != null;
         }
 
         public void MoveNext()
