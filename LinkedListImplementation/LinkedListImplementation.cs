@@ -34,6 +34,16 @@ namespace LinkedListImplementation
             }
         }
 
+        public IIterator<T> CreateIterator()
+        {
+            return new Iterator<T>(this);
+        }
+
+        public IIterator<T> CreateDescendingIterator()
+        {
+            return new DescendingIterator<T>(this);
+        }
+
         public T GetMin()
         {
             T min = Head.Data;
@@ -205,6 +215,5 @@ namespace LinkedListImplementation
                 current = current.Prev;
             }
         }
-
     }
 }

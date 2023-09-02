@@ -2,13 +2,30 @@
 
 namespace LinkedListImplementation
 {
-    class Program 
+    class Program
     {
         public static void Main(string[] args)
         {
-            IEnumerable<int> array = new int[] {1, 2, 3, 4, 5};
+            IEnumerable<int> array = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-            ILinkedList<int> list =  new MyLinkedList<int>(array);
+            ILinkedList<int> list = new MyLinkedList<int>(array);
+
+            IIterator<int> iterator = list.CreateDescendingIterator();
+
+            while (iterator.HasNext())
+            {
+                Console.Write(iterator.Current() + " ");
+                iterator.MoveNext();
+            }
+
+            iterator.Reset();
+            Console.WriteLine();
+
+            while (iterator.HasNext())
+            {
+                Console.Write(iterator.Current() + " ");
+                iterator.MoveNext();
+            }
         }
     }
 }

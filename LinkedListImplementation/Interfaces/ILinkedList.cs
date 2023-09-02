@@ -1,9 +1,8 @@
 ﻿namespace LinkedListImplementation.Interfaces
 {
-    interface ILinkedList<T>
+    interface ILinkedList<T> : IOrdinaryIterator<T>, IDescendingIterator<T>
     {
         int Count { get; }
-
         void Add(T value);
         void AddStart(T value);
         void PrintList();
