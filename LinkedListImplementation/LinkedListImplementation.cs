@@ -1,4 +1,6 @@
-﻿using LinkedListImplementation.Interfaces;
+﻿using System.Collections;
+using System.Runtime.Versioning;
+using LinkedListImplementation.Interfaces;
 
 namespace LinkedListImplementation
 {
@@ -34,14 +36,16 @@ namespace LinkedListImplementation
             }
         }
 
-        public IIterator<T> CreateIterator()
+        public IEnumerator<T> GetEnumerator()
         {
-            return new Iterator<T>(this);
-        }
+            var current = Head;
 
-        public IIterator<T> CreateDescendingIterator()
-        {
-            return new DescendingIterator<T>(this);
+            while (current != null)
+            {
+                yield return current.Data;
+
+                current = current.Next;
+            }
         }
 
         public T GetMin()
@@ -89,6 +93,8 @@ namespace LinkedListImplementation
             {
                 action();
             }
+
+            Count++;
         }
 
         public void Add(T value)
@@ -150,6 +156,8 @@ namespace LinkedListImplementation
                 current.Next.Prev = current.Prev;
                 current.Prev.Next = current.Next;
             }
+
+            Count--;
         }
 
         public void RemoveByValue(T value)
@@ -166,6 +174,8 @@ namespace LinkedListImplementation
 
                 current = current.Next;
             }
+
+            Count--;
         }
 
         public void RemoveLastByValue(T value)
@@ -182,18 +192,103 @@ namespace LinkedListImplementation
 
                 current = current.Prev;
             }
+
+            Count--;
         }
 
         public void RemoveFirst()
         {
             Head = Head.Next;
             Head.Prev = null;
+            Count--;
         }
 
         public void RemoveLast()
         {
             Tail = Tail.Prev;
             Tail.Next = null;
+            Count--;
+        }
+
+        public void Sort()
+        {
+            var current = Head;
+
+            while (current.Next != null)
+            {
+                var newCurrent = current.Next;
+
+                if (current.Data.CompareTo(newCurrent.Data) > 0)
+                {
+                    if (current.Prev == null)
+                    {
+                        current.Next = newCurrent.Next;
+                        current.Prev = newCurrent;
+                        newCurrent.Next.Prev = current;
+                        newCurrent.Next = current;
+                        newCurrent.Prev = null;
+                        Head = newCurrent;
+                    }
+                    else if (newCurrent.Next == null)
+                    {
+                        newCurrent.Next = current;
+                        newCurrent.Prev = current.Prev;
+                        current.Prev.Next = newCurrent;
+                        current.Prev = newCurrent;
+                        current.Next = null;
+                        Tail = current;
+                    }
+                    else
+                    {
+                        current.Prev.Next = newCurrent;
+                        newCurrent.Prev = current.Prev;
+                        current.Next = newCurrent.Next;
+                        current.Prev = newCurrent;
+                        newCurrent.Next.Prev = current;
+                        newCurrent.Next = current;
+                    }
+
+                    current = Head;
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+        }
+
+        public void Reverse()
+        {
+            Node<T> temp = null;
+            var current = Head;
+            Tail = Head;
+
+            while (current != null)
+            {
+                temp = current.Prev;
+                current.Prev = current.Next;
+                current.Next = temp;
+                current = current.Prev;
+            }
+
+            if (temp != null)
+            {
+                Head = temp.Prev;
+            }
+        }
+
+        public ILinkedList<T> Copy()
+        {
+            T[] array = new T[Count];
+            var current = Head;
+
+            for (int i = 0; i < Count; i++)
+            {
+                array[i] = current.Data;
+                current = current.Next;
+            }
+
+            return new MyLinkedList<T>(array);
         }
 
         public void PrintList()

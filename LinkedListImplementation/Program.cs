@@ -6,26 +6,14 @@ namespace LinkedListImplementation
     {
         public static void Main(string[] args)
         {
-            IEnumerable<int> array = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            IEnumerable<int> array = new int[] { 1, 3, 2, 4, 5, 6, 2, 3, 1 };
 
             ILinkedList<int> list = new MyLinkedList<int>(array);
 
-            IIterator<int> iterator = list.CreateDescendingIterator();
-
-            while (iterator.HasNext())
-            {
-                Console.Write(iterator.Current() + " ");
-                iterator.MoveNext();
-            }
-
-            iterator.Reset();
+            list.PrintList();
+            list.Sort();
             Console.WriteLine();
-
-            while (iterator.HasNext())
-            {
-                Console.Write(iterator.Current() + " ");
-                iterator.MoveNext();
-            }
+            list.PrintList();
         }
     }
 }
