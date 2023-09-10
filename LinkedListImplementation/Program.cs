@@ -10,10 +10,10 @@ namespace LinkedListImplementation
 
             ILinkedList<int> list = new MyLinkedList<int>(array);
 
-            list.PrintList();
-            list.Sort();
-            Console.WriteLine();
-            list.PrintList();
+            foreach(var item in list)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

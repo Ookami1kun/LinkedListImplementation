@@ -1,6 +1,6 @@
 ﻿namespace LinkedListImplementation.Interfaces
 {
-    public interface ILinkedList<T>
+    public interface ILinkedList<T> : IEnumerable<T>
     {
         int Count { get; }
         void Add(T value);

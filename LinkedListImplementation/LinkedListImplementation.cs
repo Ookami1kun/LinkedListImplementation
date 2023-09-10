@@ -36,6 +36,11 @@ namespace LinkedListImplementation
             }
         }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             var current = Head;
