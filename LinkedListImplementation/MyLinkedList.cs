@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Runtime.Versioning;
 using LinkedListImplementation.Interfaces;
 
@@ -53,6 +54,23 @@ namespace LinkedListImplementation
             }
         }
 
+        public T this[int index]
+        {
+            get
+            {
+                var current = Head;
+                T answer = Head.Data;
+
+                for (int i = 0; i <= index; i++)
+                {
+                    answer = current.Data;
+                    current = current.Next;
+                }
+
+                return answer;
+            }
+        }
+
         public T GetMin()
         {
             T min = Head.Data;
@@ -60,9 +78,9 @@ namespace LinkedListImplementation
 
             while (current.Next != null)
             {
-                if (current.Data.CompareTo(current.Next.Data) > 0)
+                if (current.Data.CompareTo(min) < 0)
                 {
-                    min = current.Next.Data;
+                    min = current.Data;
                 }
                 current = current.Next;
             }
@@ -77,9 +95,9 @@ namespace LinkedListImplementation
 
             while (current.Next != null)
             {
-                if (current.Data.CompareTo(current.Next.Data) < 0)
+                if (current.Data.CompareTo(max) > 0)
                 {
-                    max = current.Next.Data;
+                    max = current.Data;
                 }
                 current = current.Next;
             }
@@ -104,7 +122,7 @@ namespace LinkedListImplementation
 
         public void Add(T value)
         {
-            AddNode(value, () =>
+            AddNode(value, delegate
             {
                 var current = new Node<T>(value);
                 Tail.Next = current;
