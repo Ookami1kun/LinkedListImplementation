@@ -45,7 +45,7 @@ namespace LinkeListTests
             Assert.Equal(data, list[list.Count - 1]);
             list.Should().NotBeEmpty();
             list.Should().HaveCount(6);
-            list.Should().ContainInOrder(2, 3, 4, 5, data);
+            list.Should().ContainInOrder(1, 2, 3, 4, 5, data);
             list.Should().Contain(data);
         }
     }

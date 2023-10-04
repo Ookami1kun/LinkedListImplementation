@@ -18,6 +18,7 @@ namespace LinkeListTests
 
             //Assert
             Assert.Equal(expected, result);
+            list.Should().ContainInOrder(testArray);
         }
     }
 }

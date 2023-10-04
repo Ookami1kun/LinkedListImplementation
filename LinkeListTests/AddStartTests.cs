@@ -40,10 +40,11 @@ namespace LinkeListTests
             list.AddStart(data);
 
             //Assert
-            list.Should().HaveCount(6);
+            list.Should().HaveCount(testArray.Length + 1);
             list.Should().StartWith(data);
             list.Should().EndWith(list[list.Count - 1]);
             list.Should().Contain(data);
+            list.Should().ContainInOrder(data, 1, 2, 3, 4 , 5);
         }
     }
 }
